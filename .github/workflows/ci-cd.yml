@@ -48,11 +48,9 @@ jobs:
 
             # Descomprimir la nueva app
             unzip -o app.zip -d ecommerce
-
-            # IMPORTANTE: Cambiar al directorio antes de usar pm2
             cd ecommerce
 
-            # Crear .env con variables secretas
+            # Crear archivo .env con variables secretas
             echo "DB_HOST=${{ secrets.ENV_DB_HOST }}" > .env
             echo "DB_USER=${{ secrets.ENV_DB_USER }}" >> .env
             echo "DB_PASSWORD=${{ secrets.ENV_DB_PASSWORD }}" >> .env
@@ -63,12 +61,12 @@ jobs:
             # Instalar dependencias
             npm install
 
-            # Iniciar app con entorno actualizado
+            # 💥 Matar cualquier proceso que use el puerto 3000
+            fuser -k 3000/tcp || true
+
+            # Iniciar la app
             pm2 start index.js --name ecommerce --update-env
 
-            # 🔄 Guardar configuración para que se mantenga tras reinicios
-            pm2 save
-            pm2 startup systemd -u ubuntu --hp /home/ubuntu || true
 
 
 
