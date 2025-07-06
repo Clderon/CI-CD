@@ -42,12 +42,17 @@ jobs:
             sudo apt install unzip -y
             sudo npm install -g pm2 || true
 
+            # Eliminar versión anterior de la app
             pm2 delete ecommerce || true
             rm -rf ecommerce
+
+            # Descomprimir la nueva app
             unzip -o app.zip -d ecommerce
+
+            # IMPORTANTE: Cambiar al directorio antes de usar pm2
             cd ecommerce
 
-            # 🔐 Crear archivo .env desde los GitHub Secrets
+            # Crear .env con variables secretas
             echo "DB_HOST=${{ secrets.ENV_DB_HOST }}" > .env
             echo "DB_USER=${{ secrets.ENV_DB_USER }}" >> .env
             echo "DB_PASSWORD=${{ secrets.ENV_DB_PASSWORD }}" >> .env
@@ -55,6 +60,15 @@ jobs:
             echo "HOST=${{ secrets.ENV_HOST }}" >> .env
             echo "PORT=${{ secrets.ENV_PORT }}" >> .env
 
+            # Instalar dependencias
             npm install
+
+            # Iniciar app con entorno actualizado
             pm2 start index.js --name ecommerce --update-env
+
+            # 🔄 Guardar configuración para que se mantenga tras reinicios
+            pm2 save
+            pm2 startup systemd -u ubuntu --hp /home/ubuntu || true
+
+
 
