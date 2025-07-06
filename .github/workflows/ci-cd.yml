@@ -41,6 +41,8 @@ jobs:
             sudo apt update
             sudo apt install unzip -y
             sudo npm install -g pm2 || true
+
+            pm2 delete ecommerce || true
             rm -rf ecommerce
             unzip -o app.zip -d ecommerce
             cd ecommerce
@@ -54,5 +56,5 @@ jobs:
             echo "PORT=${{ secrets.ENV_PORT }}" >> .env
 
             npm install
-            pm2 stop ecommerce || true
             pm2 start index.js --name ecommerce --update-env
+
