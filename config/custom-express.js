@@ -27,7 +27,7 @@ class AppController {
       resave: false,
       saveUninitialized: true,
     }));
-    this.app.use(cors())
+    this.app.use(cors());
     this.app.use(csrf({cookie: true}));
     this.app.use(validator());
 
