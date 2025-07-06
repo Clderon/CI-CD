@@ -65,6 +65,7 @@ jobs:
             fuser -k 3000/tcp || true
 
             # Iniciar la app
+            cd ecommerce
             pm2 start index.js --name ecommerce --update-env
 
 
