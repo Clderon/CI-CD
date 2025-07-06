@@ -46,4 +46,4 @@ jobs:
             cd ecommerce
             npm install
             pm2 stop ecommerce || true
-            pm2 start app.js --name ecommerce
+            pm2 start index.js --name ecommerce
