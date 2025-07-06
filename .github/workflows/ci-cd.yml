@@ -44,6 +44,15 @@ jobs:
             rm -rf ecommerce
             unzip -o app.zip -d ecommerce
             cd ecommerce
+
+            # 🔐 Crear archivo .env desde los GitHub Secrets
+            echo "DB_HOST=${{ secrets.ENV_DB_HOST }}" > .env
+            echo "DB_USER=${{ secrets.ENV_DB_USER }}" >> .env
+            echo "DB_PASSWORD=${{ secrets.ENV_DB_PASSWORD }}" >> .env
+            echo "DB_NAME=${{ secrets.ENV_DB_NAME }}" >> .env
+            echo "HOST=${{ secrets.ENV_HOST }}" >> .env
+            echo "PORT=${{ secrets.ENV_PORT }}" >> .env
+
             npm install
             pm2 stop ecommerce || true
-            pm2 start index.js --name ecommerce
+            pm2 start index.js --name ecommerce --update-env
