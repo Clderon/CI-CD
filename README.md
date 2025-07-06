@@ -6,13 +6,13 @@ Este es un proyecto de backend para una plataforma de comercio electrónico, con
 
 ## 🚀 Tecnologías utilizadas
 
-- Node.js
-- Express
-- MySQL
-- Sequelize (opcional como ORM)
-- JSON Web Tokens (JWT)
-- bcrypt (para encriptar contraseñas)
-- dotenv
+   - Node.js
+   - Express
+   - MySQL
+   - Sequelize (opcional como ORM)
+   - JSON Web Tokens (JWT)
+   - bcrypt (para encriptar contraseñas)
+   - dotenv
 
 ---
 ## 📁 Estructura del proyecto
@@ -28,20 +28,22 @@ Este es un proyecto de backend para una plataforma de comercio electrónico, con
       └── package.json
    ```
 
-
 ## ⚙️ Configuración inicial
 
 1. Clona este repositorio:
+   
    ```bash
    git clone https://github.com/tu-usuario/tu-repo.git
    cd tu-repo
    ```
 2. Instala las dependencias:
+   
    ```bash
    npm install
    ```
 
 3. Configura las variables de entorno en un archivo .env:
+   
    ```bash
    DB_HOST=localhost
    DB_USER=root
