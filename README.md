@@ -15,17 +15,19 @@ Este es un proyecto de backend para una plataforma de comercio electrónico, con
 - dotenv
 
 ---
-
 ## 📁 Estructura del proyecto
+   ```
+      .
+      ├── config/     
+      ├── controllers/
+      ├── models/     
+      ├── routes/     
+      ├── middleware/ 
+      ├── .env        
+      ├── app.js      
+      └── package.json
+   ```
 
-├── config/ # Configuración de la base de datos
-├── controllers/ # Lógica de negocio (productos, usuarios, etc.)
-├── models/ # Modelos de base de datos
-├── routes/ # Definición de rutas de la API
-├── middleware/ # Middlewares (auth, validaciones, etc.)
-├── .env # Variables de entorno
-├── app.js # Archivo principal del servidor
-└── package.json
 
 ## ⚙️ Configuración inicial
 
@@ -35,13 +37,16 @@ Este es un proyecto de backend para una plataforma de comercio electrónico, con
    cd tu-repo
    ```
 2. Instala las dependencias:
-
-npm install
+   ```bash
+   npm install
+   ```
 
 3. Configura las variables de entorno en un archivo .env:
+   ```bash
    DB_HOST=localhost
    DB_USER=root
    DB_PASSWORD=tu_contraseña
    DB_NAME=ecommerce
    JWT_SECRET=tu_clave_secreta
    PORT=3000
+   ```

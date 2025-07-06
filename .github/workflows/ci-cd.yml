@@ -1,0 +1,49 @@
+name: CI/CD Node + MySQL App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ci_cd_pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Verificar estilo con ESLint
+        run: npx eslint .
+
+      - name: Comprimir archivos
+        run: zip -r app.zip . -x ".git/*" "node_modules/*"
+
+      - name: Enviar código a EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          source: "app.zip"
+          target: "/home/ubuntu"
+
+      - name: Desplegar en EC2 vía SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            sudo apt update
+            sudo apt install unzip -y
+            sudo npm install -g pm2 || true
+            rm -rf ecommerce
+            unzip -o app.zip -d ecommerce
+            cd ecommerce
+            npm install
+            pm2 stop ecommerce || true
+            pm2 start app.js --name ecommerce
