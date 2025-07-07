@@ -16,6 +16,12 @@ jobs:
       - name: Instalar dependencias
         run: npm install
 
+      - name: Ejecutar pruebas unitarias con Jest
+        run: |
+          echo "Ejecutando pruebas unitarias"
+          npm test
+
+
       - name: Verificar estilo con ESLint
         run: npx eslint .
 
