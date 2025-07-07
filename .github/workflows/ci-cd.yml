@@ -61,13 +61,9 @@ jobs:
             # Instalar dependencias
             npm install
 
-            # 💥 Matar cualquier proceso que use el puerto 3000
+            # Matar cualquier proceso que use el puerto 3000
             fuser -k 3000/tcp || true
 
             # Iniciar la app
             cd ecommerce
             pm2 start index.js --name ecommerce --update-env
-
-
-
-
