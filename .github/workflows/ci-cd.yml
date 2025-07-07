@@ -26,7 +26,7 @@ jobs:
         run: npx eslint .
 
       - name: Comprimir archivos
-        run: zip -r app.zip . -x ".git/*" "node_modules/*"
+        run: zip -r app.zip . -x ".git/*" "node_modules/*" "__tests__/*" "dao/productsDAOForTest.js"
 
       - name: Enviar código a EC2
         uses: appleboy/scp-action@v0.1.4
